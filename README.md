@@ -1,9 +1,9 @@
-Helloine.
+This crptocurrency consists of blockchain and flask server.
 
-im very struggling with the transition of module.
+This is just for fun and tool to make progress in programming and blockchain.
+Therefore, the form of program is not cool and stylish. sorry.
 
-i cant import the module within the other file under the different folder.
-Fuuuuuuuuuuuuuuuuuuuuuucccccccccccckkkkkkk.
+
 
 
 
