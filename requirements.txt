@@ -1,3 +1,6 @@
-
-Flask == 5.1.1
-pubsub == 
+pytest==5.1.2
+Flask==5.1.1
+pubnub==4.1.6
+requests==2.22.0
+cryptography==2.7
+Flask-Cors==3.0.8

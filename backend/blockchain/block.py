@@ -5,15 +5,20 @@ from backend.util.hex_to_binary import hex_to_binary
 from backend.config import MINE_RATE
 
 GENESIS_DATA = {
-    'timestamp' : 1,
-    'last_hash' : 'genesis_last_hash',
-    'hash' : 'genesis_hash',
-    'data' : [],
-    'difficulty' : 3,
-    'nonce' : 'genesis_nonce'
+    'timestamp': 1,
+    'last_hash': 'genesis_last_hash',
+    'hash': 'genesis_hash',
+    'data': [],
+    'difficulty': 3,
+    'nonce': 'genesis_nonce'
 }
 
 class Block:
+    """
+    Block: a unit of storage.
+    store transactions in a blockchain that supports a cryptocurrency.
+    """
+
     def __init__(self, timestamp, last_hash, hash, data, difficulty, nonce):
         self.timestamp = timestamp
         self.last_hash = last_hash
@@ -41,6 +46,10 @@ class Block:
     
     @staticmethod
     def mine_block(last_block, data):
+        """
+        Mine a block based on the given last_block and data, until a block hash
+        is found that meets the leading 0's proof of work requirement.
+        """
         timestamp = time.time_ns()
         last_hash = last_block.hash
         difficulty = Block.adjust_difficulty(last_block, timestamp)
@@ -65,6 +74,11 @@ class Block:
 
     @staticmethod
     def adjust_difficulty(last_block, new_timestamp):
+        """
+        Calculate the adjusted difficulty according to the MINE_RATE.
+        Increase the difficulty for quickly mined blocks.
+        Decrese the difficulty for slowly mined blocks.
+        """
         if (new_timestamp - last_block.timestamp) < MINE_RATE:
             return last_block.difficulty + 1
         
@@ -74,6 +88,13 @@ class Block:
         return 1
     @staticmethod
     def is_valid_block(last_block, block):
+        """
+        Validate block by enforcing the following rules:
+            -block must have the proper last_hash reference
+            -block must meet the proof of work requirement
+            -difficulty must only adjust by 1
+            -block hash must be a valid combination of the block fields
+        """
         if block.last_hash != last_block.hash:
             raise Exception('The block last_hash must be correct.')
 
@@ -99,12 +120,11 @@ def main():
     bad_block = Block.mine_block(genesis_block, 'foo')
     bad_block.last_hash = 'evil_data'
     print('succesefully done!!')
-    try :
+
+    try:
         Block.is_valid_block(genesis_block, bad_block)
     except Exception as e:
         print(f'is_valid_block: {e}')
-
-    
 
 if __name__ == '__main__ ':
     main()
