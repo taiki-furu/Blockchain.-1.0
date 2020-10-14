@@ -98,7 +98,7 @@ class Block:
         if block.last_hash != last_block.hash:
             raise Exception('The block last_hash must be correct.')
 
-        if hex_to_binary(block.hash)[o:block.difficulty] != '0' * block.difficulty:
+        if hex_to_binary(block.hash)[0:block.difficulty] != '0' * block.difficulty:
             raise Exception('The proof of work requirement was not met.')
 
         if abs(last_block.difficulty - block.difficulty) > 1:
@@ -127,3 +127,5 @@ def main():
 
 if __name__ == '__main__ ':
     main()
+
+    
