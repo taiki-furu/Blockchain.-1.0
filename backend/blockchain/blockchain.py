@@ -9,7 +9,6 @@ class Blockchain:
     Blockchain: a public ledger of transactions.
     Implemented as a list of blocks - data sets of transactions
     """
-    
     def __init__(self):
         self.chain = [Block.genesis()]
 
@@ -31,13 +30,13 @@ class Blockchain:
         try:
             Blockchain.is_valid_chain(chain)
         except Exception as e:
-            raise Exception(f'cannot replace. The incoming chain is invalid: {e}'
+            raise Exception(f'Cannot replace. The incoming chain is invalid: {e}')
         
         self.chain = chain
 
     def to_json(self):
         #serialize the blockchain into a list of blocks.
-        return list(map(lambda block: block.to_json(), self.chain)
+        return list(map(lambda block: block.to_json(), self.chain))
 
     @staticmethod
     def from_json(chain_json):
@@ -64,7 +63,7 @@ class Blockchain:
         for i in range(1, len(chain)):
             block = chain[i]
             last_block = chain[i-1]
-            block.is_valid_chain(last_block, block)
+            Block.is_valid_block(last_block, block)
 
         Blockchain.is_valid_transaction_chain(chain)
 
@@ -117,7 +116,7 @@ class Blockchain:
 def main():
     blockchain = Blockchain()
     blockchain.add_block('one')
-    blockchain.add_block('one-cyan')
+    blockchain.add_block('one-chan')
 
     print(blockchain)
     print(f'blockchain.py __name__: {__name__}')

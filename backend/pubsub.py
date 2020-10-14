@@ -17,23 +17,29 @@ CHANNELS = {
     'TRANSACTION': 'TRANSACTION'
 }
 
-
-
 class Listener(SubscribeCallback):
-    def __init__(self, blockchain):
-        self.blochchain = blockchain
-    def message(self, pubnub, message_object):
-        print(f'\n-- Channel: {message_object.cannel} | Message: {message_object.message}')
+    def __init__(self, blockchain, transaction_pool):
+        self.blockchain = blockchain
+        self.transaction_pool = transaction_pool
 
-        if message_object.channel == CHANN['BLOCK']:
+    def message(self, pubnub, message_object):
+        print(f'\n-- Channel: {message_object.channel} | Message: {message_object.message}')
+
+        if message_object.channel == CHANNELS['BLOCK']:
             block = message_object.message
             potential_chain = self.blockchain.chain[:]
             potential_chain.append(block)
 
             try:
-                self.blockchian.replace_chain(potential_chain)
+                self.blockchain.replace_chain(potential_chain)
             except Exception as e:
                 print(f'\n -- did not replace chain: {e}')
+      
+        elif message_object.channel == CHANNELS['TRANSACTION']:
+            transaction = Transaction.from_json(message_object.message)
+            self.transaction_pool.set_transaction(transaction)
+            print('\n -- Set the new transaction in the transaction pool')
+
 
 class PubSub():
     """

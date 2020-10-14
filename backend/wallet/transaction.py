@@ -45,7 +45,7 @@ class Transaction:
             'signature': sender_wallet.sign(output),
         }    
 
-    def update(self, sender_wallet, recipient, amount) :
+    def update(self, sender_wallet, recipient, amount):
         """
         Update the transaction with an existing or new recipient.
         """

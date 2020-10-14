@@ -93,7 +93,7 @@ class Block:
             -block must have the proper last_hash reference
             -block must meet the proof of work requirement
             -difficulty must only adjust by 1
-            -block hash must be a valid combination of the block fields
+            -block hash must be a valid combination of the block fieldso
         """
         if block.last_hash != last_block.hash:
             raise Exception('The block last_hash must be correct.')
@@ -117,9 +117,8 @@ class Block:
 
 def main():
     genesis_block = Block.genesis()
-    bad_block = Block.mine_block(genesis_block, 'foo')
+    bad_block = Block.mine_block(genesis_block, 'nihao shijie')
     bad_block.last_hash = 'evil_data'
-    print('succesefully done!!')
 
     try:
         Block.is_valid_block(genesis_block, bad_block)
