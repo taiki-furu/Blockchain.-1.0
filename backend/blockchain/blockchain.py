@@ -48,6 +48,7 @@ class Blockchain:
         blockchain.chain = list(
             map(lambda block_json: Block.from_json(block_json), chain_json)
         )
+        
         return blockchain
 
     @staticmethod
