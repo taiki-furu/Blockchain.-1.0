@@ -83,9 +83,11 @@ class Block:
             return last_block.difficulty + 1
         
         if (last_block.difficulty - 1) > 0:
-            return last_block.difficulty + 1
+            return last_block.difficulty - 1
 
         return 1
+
+
     @staticmethod
     def is_valid_block(last_block, block):
         """
@@ -126,6 +128,4 @@ def main():
         print(f'is_valid_block: {e}')
 
 if __name__ == '__main__ ':
-    main()
-
-    
+    main()  
