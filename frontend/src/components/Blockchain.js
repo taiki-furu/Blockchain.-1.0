@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import { API_BASE_URL } from '../config';
 import Block from './Block';
 
-const PAGE_RANGE = 3;
+const PAGE_RANGE = 5;
 
 function Blockchain() {
   const [blockchain, setBlockchain] = useState([]);
