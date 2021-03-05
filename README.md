@@ -1,4 +1,4 @@
-This crptocurrency consists of blockchain and flask server.
+This repo consists of backend which make simple blockchain and frontend with flask server.
 
 Blockchain is the kinda DB which has a few remarkable benefits.
 
